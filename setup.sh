@@ -21,6 +21,7 @@ chown -R $username:$username $builddir
 # List of packages
 packages=(
     xorg 
+    i3
     blueman 
     flatpak 
     nemo 
