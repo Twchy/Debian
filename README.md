@@ -1,6 +1,6 @@
 # Debian-Twchy
 
-Debian (Trixie) setup script from Twchy. Based on Chris Titus' Debian script.
+This is my Debian Stable install script setup script from Twchy. Based on Chris Titus' Debian script.
 This script installs the packages I use, be sure to edit to suit your needs.
 
 ### Install
