@@ -18,8 +18,42 @@ mkdir -p $builddir/.fonts
 mkdir -p $builddir/Pictures/Wallpapers
 chown -R $username:$username $builddir
 
-# Install Packages
-apt install xorg blueman flatpak nemo nitrogen lxappearance pavucontrol build-essential ninja-build gettext cmake wget curl zip unzip fonts-noto-color-emoji gnome-themes-extra breeze-cursor-theme network-manager-gnome pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 -y
+# List of packages
+packages=(
+    xorg 
+    blueman 
+    flatpak 
+    nemo 
+    nitrogen 
+    lxappearance 
+    pavucontrol 
+    build-essential 
+    ninja-build 
+    gettext 
+    cmake 
+    wget 
+    curl 
+    zip 
+    unzip 
+    fonts-noto-color-emoji 
+    gnome-themes-extra 
+    breeze-cursor-theme 
+    network-manager-gnome 
+    pkg-config 
+    libfreetype6-dev 
+    libfontconfig1-dev 
+    libxcb-xfixes0-dev 
+    libxkbcommon-dev 
+    python3 
+)
+
+# Install packages if they don't exist
+if ! dpkg -l "${packages[@]}" 1> /dev/null 2>&1; then
+    echo "Installing required packages..."
+    apt install "${packages[@]}" -y
+else
+    echo "Packages are already installed, skipping..."
+fi
 
 # Check if JetBrainsMono exists in ~/.fonts/
 if ! ls $builddir/.fonts/JetBrainsMono* 1> /dev/null 2>&1; then
