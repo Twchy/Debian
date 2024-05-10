@@ -87,6 +87,27 @@ else
     echo "Firefox is already installed or Mozilla repository exists, skipping..."
 fi
 
+# Install GreenWithEnvy to manage Nvidia GPU fans
+# Check if Nvidia GPU is present
+if lspci | grep -i 'nvidia' 1> /dev/null 2>&1; then
+    echo "Nvidia GPU found."
+    
+    # Add Flathub repository if not added
+    if ! flatpak remote-list | grep flathub 1> /dev/null 2>&1; then
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    fi
+
+    # Check if GWE is installed
+    if ! flatpak list | grep com.leinardi.gwe 1> /dev/null 2>&1; then
+        echo "Installing GWE..."
+        # Install com.leinardi.gwe from Flathub
+        flatpak install flathub com.leinardi.gwe -y
+    else
+        echo "GWE is already installed."
+    fi
+else
+    echo "Nvidia GPU not found. GWE installation skipped."
+fi
 
 echo "-------------------------------------------------------"
 echo "                   SCRIPT HAS FINISHED"
